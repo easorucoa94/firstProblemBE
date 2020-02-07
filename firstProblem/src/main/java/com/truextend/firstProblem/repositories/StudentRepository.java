@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.truextend.firstProblem.entities.ClassEntity;
+import com.truextend.firstProblem.entities.StudentEntity;
 
 @Repository
-public interface ClassRepository extends CrudRepository<ClassEntity, String> {
-	public List<ClassEntity> findAll();
+public interface StudentRepository extends CrudRepository<StudentEntity, String> {
+	public List<StudentEntity> findAll();
 }
