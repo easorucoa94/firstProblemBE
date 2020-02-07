@@ -17,7 +17,7 @@ public class ClassController {
 	@Autowired
 	ClassRepository classRepository;
 	
-	@GetMapping(path = "/")
+	@GetMapping
 	public List<ClassEntity> findAll() {
 		return classRepository.findAll();
 	}
