@@ -9,5 +9,5 @@ import com.truextend.firstProblem.entities.ClassEntity;
 
 @Repository
 public interface ClassRepository extends CrudRepository<ClassEntity, String> {
-	List<ClassEntity> findAll();
+	public List<ClassEntity> findAll();
 }
