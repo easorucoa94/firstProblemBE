@@ -34,7 +34,7 @@ public class StudentController {
 		return ResponseEntity.ok(studentRepository.save(studentEntity));
 	}
 
-	@DeleteMapping("/delete/{sStudent_id}")
+	@DeleteMapping("/{sStudent_id}")
 	public void delete(@PathVariable String sStudent_id) {
 		Long lStudent_id = Long.parseLong(sStudent_id);
 		studentRepository.deleteById(lStudent_id);
