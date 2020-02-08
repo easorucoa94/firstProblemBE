@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.truextend.firstProblem.entities.StudentEntity;
 import com.truextend.firstProblem.repositories.StudentRepository;
 
@@ -34,17 +35,28 @@ public class StudentController {
 	public ResponseEntity<StudentEntity> save(@Valid @RequestBody StudentEntity studentEntity) {
 		return ResponseEntity.ok(studentRepository.save(studentEntity));
 	}
-	
-	@PutMapping("/{sStudent_id}")
-	public ResponseEntity<StudentEntity> update(@PathVariable String sStudent_id, @Valid @RequestBody StudentEntity studentEntity) {
-		Long lStudent_id = Long.parseLong(sStudent_id);
-		studentEntity.setLStudent_id(lStudent_id);
+
+	@PutMapping("/{sStudentId}")
+	public ResponseEntity<StudentEntity> update(@PathVariable String sStudentId,
+			@Valid @RequestBody StudentEntity studentEntity) {
+		Long lStudentId = Long.parseLong(sStudentId);
+		studentEntity.setLStudentId(lStudentId);
 		return ResponseEntity.ok(studentRepository.save(studentEntity));
 	}
 
-	@DeleteMapping("/{sStudent_id}")
-	public void delete(@PathVariable String sStudent_id) {
-		Long lStudent_id = Long.parseLong(sStudent_id);
-		studentRepository.deleteById(lStudent_id);
+	@DeleteMapping("/{sStudentId}")
+	public void delete(@PathVariable String sStudentId) {
+		Long lStudentId = Long.parseLong(sStudentId);
+		studentRepository.deleteById(lStudentId);
+	}
+
+	@PostMapping(path = "/search")
+	public ResponseEntity<List<StudentEntity>> filter(@Valid @RequestBody StudentEntity studentEntity)
+			throws JsonProcessingException {
+		if (studentEntity.getStudentFilteredClasses().size() == 0) {
+			studentEntity.setStudentFilteredClasses(null);
+		}
+		return ResponseEntity.ok(studentRepository.findByObjectFilter(studentEntity.getSStudentFirstName(),
+				studentEntity.getSStudentLastName(), studentEntity.getStudentFilteredClasses()));
 	}
 }
