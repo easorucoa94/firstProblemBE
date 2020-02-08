@@ -49,6 +49,7 @@ public class ClassController {
 		Long lClassId = Long.parseLong(sClassId);
 		classRepository.deleteById(lClassId);
 	}
+
 	@PostMapping(path = "/search")
 	public ResponseEntity<List<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
 			throws JsonProcessingException {
