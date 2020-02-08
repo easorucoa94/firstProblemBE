@@ -26,7 +26,7 @@ public class ClassEntity implements Serializable {
 	@ManyToMany(mappedBy = "studentClasses", targetEntity = StudentEntity.class)
 	@JsonIgnoreProperties("studentClasses")
 	private List<StudentEntity> studentsInClass;
-	
+
 	@Transient
 	private List<Long> classFilteredStudents;
 
@@ -88,11 +88,11 @@ public class ClassEntity implements Serializable {
 	public void setStudentsInClass(List<StudentEntity> studentsInClass) {
 		this.studentsInClass = studentsInClass;
 	}
-	
+
 	public List<Long> getClassFilteredStudents() {
 		return this.classFilteredStudents;
 	}
-	
+
 	public void setClassFilteredStudents(List<Long> classFilteredStudents) {
 		this.classFilteredStudents = classFilteredStudents;
 	}

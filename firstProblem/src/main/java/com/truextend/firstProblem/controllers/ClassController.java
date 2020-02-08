@@ -17,23 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.truextend.firstProblem.entities.ClassEntity;
-import com.truextend.firstProblem.repositories.ClassRepository;
+import com.truextend.firstProblem.services.ClassService;
+import com.truextend.firstProblem.services.impl.ClassServiceImpl;
 
 @RestController
 @RequestMapping(path = "/class")
 public class ClassController {
 
 	@Autowired
-	ClassRepository classRepository;
+	ClassService classService = new ClassServiceImpl();
 
 	@GetMapping
 	public List<ClassEntity> findAll() {
-		return classRepository.findAll();
+		return classService.findAll();
 	}
 
 	@PostMapping
 	public ResponseEntity<ClassEntity> save(@Valid @RequestBody ClassEntity classEntity) {
-		return ResponseEntity.ok(classRepository.save(classEntity));
+		return ResponseEntity.ok(classService.save(classEntity));
 	}
 
 	@PutMapping("/{sClassId}")
@@ -41,22 +42,20 @@ public class ClassController {
 			@Valid @RequestBody ClassEntity classEntity) {
 		Long lClassId = Long.parseLong(sClassId);
 		classEntity.setLClassId(lClassId);
-		return ResponseEntity.ok(classRepository.save(classEntity));
+		return ResponseEntity.ok(classService.save(classEntity));
 	}
 
 	@DeleteMapping("/{sClassId}")
 	public void delete(@PathVariable String sClassId) {
 		Long lClassId = Long.parseLong(sClassId);
-		classRepository.deleteById(lClassId);
+		classService.deleteById(lClassId);
 	}
+
 	@PostMapping(path = "/search")
 	public ResponseEntity<List<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
 			throws JsonProcessingException {
-		if (classEntity.getClassFilteredStudents().size() == 0) {
-			classEntity.setClassFilteredStudents(null);
-		}
 		return ResponseEntity
-				.ok(classRepository.findByObjectFilter(classEntity.getSClassCode(), classEntity.getSClassTitle(),
+				.ok(classService.findByObjectFilter(classEntity.getSClassCode(), classEntity.getSClassTitle(),
 						classEntity.getSClassDescription(), classEntity.getClassFilteredStudents()));
 	}
 

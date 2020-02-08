@@ -17,23 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.truextend.firstProblem.entities.StudentEntity;
-import com.truextend.firstProblem.repositories.StudentRepository;
+import com.truextend.firstProblem.services.StudentService;
+import com.truextend.firstProblem.services.impl.StudentServiceImpl;
 
 @RestController
 @RequestMapping(path = "/student")
 public class StudentController {
 
 	@Autowired
-	StudentRepository studentRepository;
+	StudentService studentService = new StudentServiceImpl();
 
 	@GetMapping
 	public List<StudentEntity> findAll() {
-		return studentRepository.findAll();
+		return studentService.findAll();
 	}
 
 	@PostMapping
 	public ResponseEntity<StudentEntity> save(@Valid @RequestBody StudentEntity studentEntity) {
-		return ResponseEntity.ok(studentRepository.save(studentEntity));
+		return ResponseEntity.ok(studentService.save(studentEntity));
 	}
 
 	@PutMapping("/{sStudentId}")
@@ -41,22 +42,19 @@ public class StudentController {
 			@Valid @RequestBody StudentEntity studentEntity) {
 		Long lStudentId = Long.parseLong(sStudentId);
 		studentEntity.setLStudentId(lStudentId);
-		return ResponseEntity.ok(studentRepository.save(studentEntity));
+		return ResponseEntity.ok(studentService.save(studentEntity));
 	}
 
 	@DeleteMapping("/{sStudentId}")
 	public void delete(@PathVariable String sStudentId) {
 		Long lStudentId = Long.parseLong(sStudentId);
-		studentRepository.deleteById(lStudentId);
+		studentService.deleteById(lStudentId);
 	}
 
 	@PostMapping(path = "/search")
 	public ResponseEntity<List<StudentEntity>> filter(@Valid @RequestBody StudentEntity studentEntity)
 			throws JsonProcessingException {
-		if (studentEntity.getStudentFilteredClasses().size() == 0) {
-			studentEntity.setStudentFilteredClasses(null);
-		}
-		return ResponseEntity.ok(studentRepository.findByObjectFilter(studentEntity.getSStudentFirstName(),
+		return ResponseEntity.ok(studentService.findByObjectFilter(studentEntity.getSStudentFirstName(),
 				studentEntity.getSStudentLastName(), studentEntity.getStudentFilteredClasses()));
 	}
 }
