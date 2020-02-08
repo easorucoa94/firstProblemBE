@@ -1,12 +1,16 @@
 package com.truextend.firstProblem.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "te_classes")
-public class ClassEntity {
+public class ClassEntity implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,13 +19,21 @@ public class ClassEntity {
 	private String sClass_title;
 	private String sClass_description;
 	
-	@OneToMany(mappedBy = "classEntity")
-	List<ClassesStudentsEntity> studentsInClass;
+	@ManyToMany(mappedBy = "studentClasses", targetEntity = StudentEntity.class)
+	@JsonIgnoreProperties("studentClasses")
+	private List<StudentEntity> studentsInClass;
 
 	protected ClassEntity() {
 	}
+	
+	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description) {
+		this.lClass_id = lClass_id;
+		this.sClass_code = sClass_code;
+		this.sClass_title = sClass_title;
+		this.sClass_description = sClass_description;
+	}
 
-	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description, List<ClassesStudentsEntity> studentsInClass) {
+	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description, List<StudentEntity> studentsInClass) {
 		this.lClass_id = lClass_id;
 		this.sClass_code = sClass_code;
 		this.sClass_title = sClass_title;
@@ -61,11 +73,11 @@ public class ClassEntity {
 		this.sClass_description = sClass_description;
 	}
 	
-	public List<ClassesStudentsEntity> getStudentsInClass() {
+	public List<StudentEntity> getStudentsInClass() {
 		return this.studentsInClass;
 	}
 
-	public void setStudentsInClass(List<ClassesStudentsEntity> studentsInClass) {
+	public void setStudentsInClass(List<StudentEntity> studentsInClass) {
 		this.studentsInClass = studentsInClass;
 	}
 }
