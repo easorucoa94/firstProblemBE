@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.truextend.firstProblem.entities.ClassEntity;
 import com.truextend.firstProblem.repositories.ClassRepository;
 
@@ -34,18 +35,29 @@ public class ClassController {
 	public ResponseEntity<ClassEntity> save(@Valid @RequestBody ClassEntity classEntity) {
 		return ResponseEntity.ok(classRepository.save(classEntity));
 	}
-	
-	@PutMapping("/{sClass_id}")
-	public ResponseEntity<ClassEntity> update(@PathVariable String sClass_id, @Valid @RequestBody ClassEntity classEntity) {
-		Long lClass_id = Long.parseLong(sClass_id);
-		classEntity.setLClass_id(lClass_id);
+
+	@PutMapping("/{sClassId}")
+	public ResponseEntity<ClassEntity> update(@PathVariable String sClassId,
+			@Valid @RequestBody ClassEntity classEntity) {
+		Long lClassId = Long.parseLong(sClassId);
+		classEntity.setLClassId(lClassId);
 		return ResponseEntity.ok(classRepository.save(classEntity));
 	}
 
-	@DeleteMapping("/{sClass_id}")
-	public void delete(@PathVariable String sClass_id) {
-		Long lClass_id = Long.parseLong(sClass_id);
-		classRepository.deleteById(lClass_id);
+	@DeleteMapping("/{sClassId}")
+	public void delete(@PathVariable String sClassId) {
+		Long lClassId = Long.parseLong(sClassId);
+		classRepository.deleteById(lClassId);
+	}
+	@PostMapping(path = "/search")
+	public ResponseEntity<List<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
+			throws JsonProcessingException {
+		if (classEntity.getClassFilteredStudents().size() == 0) {
+			classEntity.setClassFilteredStudents(null);
+		}
+		return ResponseEntity
+				.ok(classRepository.findByObjectFilter(classEntity.getSClassCode(), classEntity.getSClassTitle(),
+						classEntity.getSClassDescription(), classEntity.getClassFilteredStudents()));
 	}
 
 }

@@ -10,74 +10,90 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "te_classes")
-public class ClassEntity implements Serializable{
+public class ClassEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long lClass_id;
-	private String sClass_code;
-	private String sClass_title;
-	private String sClass_description;
-	
+	@Column(name = "lClass_id")
+	private Long lClassId;
+	@Column(name = "sClass_code")
+	private String sClassCode;
+	@Column(name = "sClass_title")
+	private String sClassTitle;
+	@Column(name = "sClass_description")
+	private String sClassDescription;
+
 	@ManyToMany(mappedBy = "studentClasses", targetEntity = StudentEntity.class)
 	@JsonIgnoreProperties("studentClasses")
 	private List<StudentEntity> studentsInClass;
+	
+	@Transient
+	private List<Long> classFilteredStudents;
 
 	protected ClassEntity() {
 	}
-	
-	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description) {
-		this.lClass_id = lClass_id;
-		this.sClass_code = sClass_code;
-		this.sClass_title = sClass_title;
-		this.sClass_description = sClass_description;
+
+	public ClassEntity(Long lClassId, String sClassCode, String sClassTitle, String sClassDescription) {
+		this.lClassId = lClassId;
+		this.sClassCode = sClassCode;
+		this.sClassTitle = sClassTitle;
+		this.sClassDescription = sClassDescription;
 	}
 
-	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description, List<StudentEntity> studentsInClass) {
-		this.lClass_id = lClass_id;
-		this.sClass_code = sClass_code;
-		this.sClass_title = sClass_title;
-		this.sClass_description = sClass_description;
+	public ClassEntity(Long lClassId, String sClassCode, String sClassTitle, String sClassDescription,
+			List<StudentEntity> studentsInClass) {
+		this.lClassId = lClassId;
+		this.sClassCode = sClassCode;
+		this.sClassTitle = sClassTitle;
+		this.sClassDescription = sClassDescription;
 		this.studentsInClass = studentsInClass;
 	}
 
-	public Long getLClass_id() {
-		return this.lClass_id;
+	public Long getLClassId() {
+		return this.lClassId;
 	}
 
-	public void setLClass_id(Long lClass_id) {
-		this.lClass_id = lClass_id;
+	public void setLClassId(Long lClassId) {
+		this.lClassId = lClassId;
 	}
 
-	public String getSClass_code() {
-		return this.sClass_code;
+	public String getSClassCode() {
+		return this.sClassCode;
 	}
 
-	public void setSClass_code(String sClass_code) {
-		this.sClass_code = sClass_code;
+	public void setSClassCode(String sClassCode) {
+		this.sClassCode = sClassCode;
 	}
 
-	public String getSClass_title() {
-		return this.sClass_title;
+	public String getSClassTitle() {
+		return this.sClassTitle;
 	}
 
-	public void setSClass_title(String sClass_title) {
-		this.sClass_title = sClass_title;
+	public void setSClassTitle(String sClassTitle) {
+		this.sClassTitle = sClassTitle;
 	}
 
-	public String getSClass_description() {
-		return this.sClass_description;
+	public String getSClassDescription() {
+		return this.sClassDescription;
 	}
 
-	public void setSClass_description(String sClass_description) {
-		this.sClass_description = sClass_description;
+	public void setSClassDescription(String sClassDescription) {
+		this.sClassDescription = sClassDescription;
 	}
-	
+
 	public List<StudentEntity> getStudentsInClass() {
 		return this.studentsInClass;
 	}
 
 	public void setStudentsInClass(List<StudentEntity> studentsInClass) {
 		this.studentsInClass = studentsInClass;
+	}
+	
+	public List<Long> getClassFilteredStudents() {
+		return this.classFilteredStudents;
+	}
+	
+	public void setClassFilteredStudents(List<Long> classFilteredStudents) {
+		this.classFilteredStudents = classFilteredStudents;
 	}
 }
