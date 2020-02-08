@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.truextend.firstProblem.entities.StudentEntity;
 
 @Repository
-public interface StudentRepository extends CrudRepository<StudentEntity, String> {
+public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
 	public List<StudentEntity> findAll();
 }
