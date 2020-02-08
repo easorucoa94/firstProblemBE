@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +32,13 @@ public class StudentController {
 
 	@PostMapping
 	public ResponseEntity<StudentEntity> save(@Valid @RequestBody StudentEntity studentEntity) {
+		return ResponseEntity.ok(studentRepository.save(studentEntity));
+	}
+	
+	@PutMapping("/{sStudent_id}")
+	public ResponseEntity<StudentEntity> update(@PathVariable String sStudent_id, @Valid @RequestBody StudentEntity studentEntity) {
+		Long lStudent_id = Long.parseLong(sStudent_id);
+		studentEntity.setLStudent_id(lStudent_id);
 		return ResponseEntity.ok(studentRepository.save(studentEntity));
 	}
 

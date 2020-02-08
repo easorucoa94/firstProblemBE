@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +32,13 @@ public class ClassController {
 
 	@PostMapping
 	public ResponseEntity<ClassEntity> save(@Valid @RequestBody ClassEntity classEntity) {
+		return ResponseEntity.ok(classRepository.save(classEntity));
+	}
+	
+	@PutMapping("/{sClass_id}")
+	public ResponseEntity<ClassEntity> update(@PathVariable String sClass_id, @Valid @RequestBody ClassEntity classEntity) {
+		Long lClass_id = Long.parseLong(sClass_id);
+		classEntity.setLClass_id(lClass_id);
 		return ResponseEntity.ok(classRepository.save(classEntity));
 	}
 
