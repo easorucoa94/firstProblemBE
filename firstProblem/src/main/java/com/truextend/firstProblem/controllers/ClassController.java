@@ -20,24 +20,24 @@ import com.truextend.firstProblem.repositories.ClassRepository;
 @RestController
 @RequestMapping(path = "/class")
 public class ClassController {
-	
+
 	@Autowired
 	ClassRepository classRepository;
-	
+
 	@GetMapping
 	public List<ClassEntity> findAll() {
 		return classRepository.findAll();
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<ClassEntity> save(@Valid @RequestBody ClassEntity classEntity) {
 		return ResponseEntity.ok(classRepository.save(classEntity));
 	}
-	
+
 	@DeleteMapping("/delete/{sClass_id}")
-    public void delete(@PathVariable String sClass_id) {
+	public void delete(@PathVariable String sClass_id) {
 		Long lClass_id = Long.parseLong(sClass_id);
-        classRepository.deleteById(lClass_id);
-    }
-	
+		classRepository.deleteById(lClass_id);
+	}
+
 }
