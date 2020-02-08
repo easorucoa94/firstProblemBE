@@ -1,5 +1,7 @@
 package com.truextend.firstProblem.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,15 +14,19 @@ public class ClassEntity {
 	private String sClass_code;
 	private String sClass_title;
 	private String sClass_description;
+	
+	@OneToMany(mappedBy = "classEntity")
+	List<ClassesStudentsEntity> studentsInClass;
 
 	protected ClassEntity() {
 	}
 
-	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description) {
+	public ClassEntity(Long lClass_id, String sClass_code, String sClass_title, String sClass_description, List<ClassesStudentsEntity> studentsInClass) {
 		this.lClass_id = lClass_id;
 		this.sClass_code = sClass_code;
 		this.sClass_title = sClass_title;
 		this.sClass_description = sClass_description;
+		this.studentsInClass = studentsInClass;
 	}
 
 	public Long getLClass_id() {
@@ -53,5 +59,13 @@ public class ClassEntity {
 
 	public void setSClass_description(String sClass_description) {
 		this.sClass_description = sClass_description;
+	}
+	
+	public List<ClassesStudentsEntity> getStudentsInClass() {
+		return this.studentsInClass;
+	}
+
+	public void setStudentsInClass(List<ClassesStudentsEntity> studentsInClass) {
+		this.studentsInClass = studentsInClass;
 	}
 }

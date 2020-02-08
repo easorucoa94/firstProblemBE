@@ -1,9 +1,12 @@
 package com.truextend.firstProblem.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,14 +18,18 @@ public class StudentEntity {
 	private Long lStudent_id;
 	private String sStudent_firstName;
 	private String sStudent_lastName;
+	
+	@OneToMany(mappedBy = "studentEntity")
+	List<ClassesStudentsEntity> studentClasses;
 
 	protected StudentEntity() {
 	}
 
-	public StudentEntity(Long lStudent_id, String sStudent_firstName, String sStudent_lastName) {
+	public StudentEntity(Long lStudent_id, String sStudent_firstName, String sStudent_lastName, List<ClassesStudentsEntity> studentClasses) {
 		this.lStudent_id = lStudent_id;
 		this.sStudent_firstName = sStudent_firstName;
 		this.sStudent_lastName = sStudent_lastName;
+		this.studentClasses = studentClasses;
 	}
 
 	public Long getLStudent_id() {
@@ -47,5 +54,13 @@ public class StudentEntity {
 
 	public void setSStudent_lastName(String sStudent_lastName) {
 		this.sStudent_lastName = sStudent_lastName;
+	}
+	
+	public List<ClassesStudentsEntity> getStudentClasses() {
+		return this.studentClasses;
+	}
+
+	public void setStudentClasses(List<ClassesStudentsEntity> studentClasses) {
+		this.studentClasses = studentClasses;
 	}
 }
