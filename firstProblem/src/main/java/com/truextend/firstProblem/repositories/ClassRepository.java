@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.truextend.firstProblem.entities.ClassEntity;
 
 @Repository
-public interface ClassRepository extends CrudRepository<ClassEntity, String> {
+public interface ClassRepository extends CrudRepository<ClassEntity, Long> {
 	public List<ClassEntity> findAll();
 }
