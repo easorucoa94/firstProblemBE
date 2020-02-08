@@ -27,7 +27,7 @@ public class ClassController {
 		return classRepository.findAll();
 	}
 	
-	@PostMapping(consumes = "application/json")
+	@PostMapping
 	public ResponseEntity<ClassEntity> save(@Valid @RequestBody ClassEntity classEntity) {
 		return ResponseEntity.ok(classRepository.save(classEntity));
 	}
