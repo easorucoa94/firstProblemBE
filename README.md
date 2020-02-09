@@ -95,6 +95,64 @@ Develop a **REST API** to run the following operations:
 }
 ```
 
+- **Path**: /{sStudentId} (PUT REQUEST) --- Updates Student with ID equals {sStudentId}
+
+**Body**: StudentEntity Object
+```
+{
+	"sstudentFirstName": "Alan",
+	"sstudentLastName": "Saavedra"
+}
+```
+
+**Reponse**: StudentEntity Object
+```
+{
+    "studentClasses": null,
+    "studentFilteredClasses": null,
+    "lstudentId": 4,
+    "sstudentFirstName": "Alan",
+    "sstudentLastName": "Saavedra"
+}
+```
+
+- **Path**: /{sStudentId} (DELETE REQUEST) --- Deletes Student with ID equals {sStudentId}
+
+**Body**: None
+
+**Reponse**: None
+
+- **Path**: /search (POST REQUEST) --- Filters Students based on properties or relationship between classes and students
+
+**Body**: StudentEntity Object
+```
+{
+	"sstudentFirstName": "A",
+	"sstudentLastName": "",
+	"studentFilteredClasses": [] #Array ["1","2","3","4"]
+}
+```
+
+**Reponse**: Collection of StudentEntity Object
+```
+[
+    {
+        "studentClasses": [],
+        "studentFilteredClasses": null,
+        "lstudentId": 4,
+        "sstudentFirstName": "Alan",
+        "sstudentLastName": "Saavedra"
+    },
+    {
+        "studentClasses": [],
+        "studentFilteredClasses": null,
+        "lstudentId": 6,
+        "sstudentFirstName": "Adrian",
+        "sstudentLastName": "Cuellar"
+    }
+]
+```
+
 ### http://{SERVER_URL}:{SERVER_PORT}/class
 - **Path**: / (GET REQUEST) --- List all classes
 
@@ -135,4 +193,59 @@ Develop a **REST API** to run the following operations:
     "sclassTitle": "Maths",
     "sclassDescription": "Learn maths"
 }
+```
+
+- **Path**: /{sClassId} (PUT REQUEST) --- Updates Class with ID equals {sClassId}
+
+**Body**: ClassEntity Object
+```
+{
+	"sclassCode": "EME101",
+	"sclassDescription": "New desc",
+	"sclassTitle": "New title"
+}
+```
+
+**Reponse**: ClassEntity Object
+```
+{
+    "studentsInClass": null,
+    "classFilteredStudents": null,
+    "lclassId": 3,
+    "sclassCode": "EME101",
+    "sclassTitle": "New title",
+    "sclassDescription": "New desc"
+}
+```
+
+- **Path**: /{sClassId} (DELETE REQUEST) --- Deletes Class with ID equals {sClassId}
+
+**Body**: None
+
+**Reponse**: None
+
+- **Path**: /search (POST REQUEST) --- Filters Classes based on properties or relationship between classes and students
+
+**Body**: ClassEntity Object
+```
+{
+	"sclassCode": "EM",
+	"sclassTitle": "tit",
+	"sclassDescription": "desc",
+	"classFilteredStudents": [] #Array ["1","2","3","4"]
+}
+```
+
+**Reponse**: Collection of ClassEntity Object
+```
+[
+    {
+        "studentsInClass": [],
+        "classFilteredStudents": null,
+        "lclassId": 5,
+        "sclassCode": "MAT-101",
+        "sclassTitle": "Maths",
+        "sclassDescription": "Learn maths"
+    }
+]
 ```
