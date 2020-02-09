@@ -35,7 +35,7 @@ Develop a **REST API** to run the following operations:
 - **com.truextend.firstProblem**: Contains Spring Boot's main class, needed to run the application.
 - **com.truextend.firstProblem.controllers**: Contains all restControllers involved in this solution.
 - **com.truextend.firstProblem.entities**: Contains actors entities/models.
-- **com.truextend.firstProblem.repositories**: Containsthe Repository Classes layer.
+- **com.truextend.firstProblem.repositories**: Contains the Repository Classes layer.
 - **com.truextend.firstProblem.services**: Contains the Service layer and its implementations **(~ServiceImpl.java)**
 
 ## Data Base details
