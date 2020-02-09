@@ -29,6 +29,10 @@ Develop a **REST API** to run the following operations:
 
 ## Solution Details
 
+This solution was built using Spring Boot and packed with Maven.
+
+Database connection to a MySQL5.7 DataBase
+
 ## How to import this project
 
 ## Package distribution
