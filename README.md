@@ -56,3 +56,39 @@ Develop a **REST API** to run the following operations:
 ![Data Base model](database_model.png)
 
 ## Application endpoints
+### http://{SERVER_URL}:{SERVER_PORT}/student
+- **Path**: / (GET REQUEST) --- List all students
+
+**Body**: none
+
+**Reponse**: Collection of StudentEntity
+```
+[
+    {
+        "studentClasses": [],
+        "studentFilteredClasses": null,
+        "lstudentId": 4,
+        "sstudentFirstName": "Adrian",
+        "sstudentLastName": "Cuellar"
+    }
+]
+```
+
+### http://{SERVER_URL}:{SERVER_PORT}/class
+- **Path**: / (GET REQUEST) --- List all classes
+
+**Body**: none
+
+**Reponse**: Collection of ClassEntity
+```
+[
+    {
+        "studentsInClass": [],
+        "classFilteredStudents": null,
+        "lclassId": 3,
+        "sclassCode": "MAT-101",
+        "sclassTitle": "Maths",
+        "sclassDescription": "Learn maths"
+    }
+]
+```
