@@ -149,7 +149,7 @@ Database connection to a MySQL5.7 DataBase
 {
 	"sstudentFirstName": "A",
 	"sstudentLastName": "",
-	"studentFilteredClasses": [] #Array ["1","2","3","4"]
+	"studentFilteredClasses": [] #Array [1,2,3,4]
 }
 ```
 
@@ -267,7 +267,7 @@ Database connection to a MySQL5.7 DataBase
 	"sclassCode": "EM",
 	"sclassTitle": "tit",
 	"sclassDescription": "desc",
-	"classFilteredStudents": [] #Array ["1","2","3","4"]
+	"classFilteredStudents": [] #Array [1,2,3,4]
 }
 ```
 
