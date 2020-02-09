@@ -46,7 +46,7 @@ Develop a **REST API** to run the following operations:
 
 **Port**: 3306
 
-**DataBase**: truextend
+**DataBase**: truextendfirstproblem
 
 **Username**: truextend
 
