@@ -56,6 +56,7 @@ public class ClassController {
 		classService.deleteById(lClassId);
 	}
 
+	@CrossOrigin
 	@PostMapping(path = "/search")
 	public ResponseEntity<List<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
 			throws JsonProcessingException {
