@@ -3,7 +3,14 @@ package com.truextend.firstProblem.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,8 +29,8 @@ public class ClassEntity implements Serializable {
 	private String sClassTitle;
 	@Column(name = "sClass_description")
 	private String sClassDescription;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {
-			CascadeType.ALL }, mappedBy = "studentClasses", targetEntity = StudentEntity.class)
+
+	@ManyToMany(mappedBy = "studentClasses", targetEntity = StudentEntity.class)
 	@JsonIgnoreProperties("studentClasses")
 	private List<StudentEntity> studentsInClass;
 

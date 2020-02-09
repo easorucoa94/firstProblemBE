@@ -32,7 +32,7 @@ public class StudentEntity implements Serializable {
 	@Column(name = "sStudent_lastName")
 	private String sStudentLastName;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "te_students_classes_relation", joinColumns = @JoinColumn(name = "lStudent_id"), inverseJoinColumns = @JoinColumn(name = "lClass_id"))
 	@JsonIgnoreProperties("studentsInClass")
 	private List<ClassEntity> studentClasses;
