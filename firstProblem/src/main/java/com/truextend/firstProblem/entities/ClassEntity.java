@@ -22,8 +22,8 @@ public class ClassEntity implements Serializable {
 	private String sClassTitle;
 	@Column(name = "sClass_description")
 	private String sClassDescription;
-
-	@ManyToMany(mappedBy = "studentClasses", targetEntity = StudentEntity.class)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {
+			CascadeType.ALL }, mappedBy = "studentClasses", targetEntity = StudentEntity.class)
 	@JsonIgnoreProperties("studentClasses")
 	private List<StudentEntity> studentsInClass;
 
