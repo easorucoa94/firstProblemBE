@@ -1,6 +1,7 @@
 package com.truextend.firstProblem.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
-	public List<ClassEntity> findByObjectFilter(String sClassCode, String sClassTitle, String sClassDescription,
+	public Set<ClassEntity> findByObjectFilter(String sClassCode, String sClassTitle, String sClassDescription,
 			List<Long> classFilteredStudents) {
 		if (classFilteredStudents.size() == 0) {
 			classFilteredStudents = null;

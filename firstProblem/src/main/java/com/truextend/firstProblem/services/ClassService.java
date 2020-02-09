@@ -1,6 +1,7 @@
 package com.truextend.firstProblem.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,6 @@ public interface ClassService {
 
 	public void deleteById(Long lClassId);
 
-	public List<ClassEntity> findByObjectFilter(String sClassCode, String sClassTitle, String sClassDescription,
+	public Set<ClassEntity> findByObjectFilter(String sClassCode, String sClassTitle, String sClassDescription,
 			List<Long> classFilteredStudents);
 }

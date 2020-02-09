@@ -1,6 +1,7 @@
 package com.truextend.firstProblem.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -58,7 +59,7 @@ public class ClassController {
 
 	@CrossOrigin
 	@PostMapping(path = "/search")
-	public ResponseEntity<List<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
+	public ResponseEntity<Set<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
 			throws JsonProcessingException {
 		return ResponseEntity
 				.ok(classService.findByObjectFilter(classEntity.getSClassCode(), classEntity.getSClassTitle(),

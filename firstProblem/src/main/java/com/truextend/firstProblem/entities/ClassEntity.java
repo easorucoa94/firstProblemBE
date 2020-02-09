@@ -2,6 +2,7 @@ package com.truextend.firstProblem.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class ClassEntity implements Serializable {
 
 	@ManyToMany(mappedBy = "studentClasses", targetEntity = StudentEntity.class)
 	@JsonIgnoreProperties("studentClasses")
-	private List<StudentEntity> studentsInClass;
+	private Set<StudentEntity> studentsInClass;
 
 	@Transient
 	private List<Long> classFilteredStudents;
@@ -48,7 +49,7 @@ public class ClassEntity implements Serializable {
 	}
 
 	public ClassEntity(Long lClassId, String sClassCode, String sClassTitle, String sClassDescription,
-			List<StudentEntity> studentsInClass) {
+			Set<StudentEntity> studentsInClass) {
 		this.lClassId = lClassId;
 		this.sClassCode = sClassCode;
 		this.sClassTitle = sClassTitle;
@@ -88,11 +89,11 @@ public class ClassEntity implements Serializable {
 		this.sClassDescription = sClassDescription;
 	}
 
-	public List<StudentEntity> getStudentsInClass() {
+	public Set<StudentEntity> getStudentsInClass() {
 		return this.studentsInClass;
 	}
 
-	public void setStudentsInClass(List<StudentEntity> studentsInClass) {
+	public void setStudentsInClass(Set<StudentEntity> studentsInClass) {
 		this.studentsInClass = studentsInClass;
 	}
 
