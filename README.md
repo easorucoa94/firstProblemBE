@@ -74,6 +74,27 @@ Develop a **REST API** to run the following operations:
 ]
 ```
 
+- **Path**: / (POST REQUEST) --- Register / Insert a new Student
+
+**Body**: StudentEntity Object
+```
+{
+	"sstudentFirstName": "Adrian",
+	"sstudentLastName": "Cuellar"
+}
+```
+
+**Reponse**: StudentEntity Object
+```
+{
+    "studentClasses": null,
+    "studentFilteredClasses": null,
+    "lstudentId": 4,
+    "sstudentFirstName": "Adrian",
+    "sstudentLastName": "Cuellar"
+}
+```
+
 ### http://{SERVER_URL}:{SERVER_PORT}/class
 - **Path**: / (GET REQUEST) --- List all classes
 
@@ -91,4 +112,27 @@ Develop a **REST API** to run the following operations:
         "sclassDescription": "Learn maths"
     }
 ]
+```
+
+- **Path**: / (POST REQUEST) --- Register / Insert a new Class
+
+**Body**: ClassEntity Object
+```
+{
+	"sclassCode": "MAT-101",
+	"sclassTitle": "Maths",
+	"sclassDescription": "Learn maths"
+}
+```
+
+**Reponse**: ClassEntity Object
+```
+{
+    "studentsInClass": null,
+    "classFilteredStudents": null,
+    "lclassId": 3,
+    "sclassCode": "MAT-101",
+    "sclassTitle": "Maths",
+    "sclassDescription": "Learn maths"
+}
 ```
