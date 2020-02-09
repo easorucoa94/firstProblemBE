@@ -53,5 +53,6 @@ Develop a **REST API** to run the following operations:
 **Password**: truextend
 
 ### Data Base model
+![Data Base model](database_model.png)
 
 ## Application endpoints
