@@ -76,24 +76,42 @@ Database connection to a MySQL5.7 DataBase
 ]
 ```
 
-- **Path**: / (POST REQUEST) --- Register / Insert a new Student
+- **Path**: / (POST REQUEST) --- Register / Insert a new Student and (OPTIONAL) assign them to a class (if the class does not exist it will create a new one)
 
 **Body**: StudentEntity Object
 ```
 {
-	"sstudentFirstName": "Adrian",
-	"sstudentLastName": "Cuellar"
+    "studentClasses": [
+        {
+            "lclassId": 7, #If Id is not put on the classEntity Object, it will create a new class
+            "sclassCode": "MAT-102",
+            "sclassTitle": "Math2",
+            "sclassDescription": "Learn maths2"
+        }
+    ],
+    "studentFilteredClasses": null,
+    "lstudentId": 4,
+    "sstudentFirstName": "Alan",
+    "sstudentLastName": "Saavedra"
 }
 ```
 
 **Reponse**: StudentEntity Object
 ```
 {
-    "studentClasses": null,
+    "studentClasses": [
+        {
+            "classFilteredStudents": null,
+            "lclassId": 7,
+            "sclassCode": "MAT-102",
+            "sclassTitle": "Math2",
+            "sclassDescription": "Learn maths2"
+        }
+    ],
     "studentFilteredClasses": null,
     "lstudentId": 4,
-    "sstudentFirstName": "Adrian",
-    "sstudentLastName": "Cuellar"
+    "sstudentFirstName": "Alan",
+    "sstudentLastName": "Saavedra"
 }
 ```
 
@@ -174,26 +192,41 @@ Database connection to a MySQL5.7 DataBase
 ]
 ```
 
-- **Path**: / (POST REQUEST) --- Register / Insert a new Class
+- **Path**: / (POST REQUEST) --- Register / Insert a new Class and (OPTIONAL) can assign students to it (if the student does not exist it will create a new one)
 
 **Body**: ClassEntity Object
 ```
 {
-	"sclassCode": "MAT-101",
-	"sclassTitle": "Maths",
-	"sclassDescription": "Learn maths"
+    "studentsInClass": [
+    	{
+		"lstudentId": 4, #If Id is not put on the classEntity Object, it will create a new student
+    		"sstudentFirstName": "Alan",
+    		"sstudentLastName": "Saavedra"
+	}
+    ],
+    "classFilteredStudents": null,
+    "sclassCode": "MAT-101",
+    "sclassTitle": "Maths",
+    "sclassDescription": "Learn maths"
 }
 ```
 
 **Reponse**: ClassEntity Object
 ```
 {
-    "studentsInClass": null,
-    "classFilteredStudents": null,
-    "lclassId": 3,
-    "sclassCode": "MAT-101",
-    "sclassTitle": "Maths",
-    "sclassDescription": "Learn maths"
+	"studentsInClass": [
+	    {
+		"studentFilteredClasses": null,
+		"lstudentId": 4,
+		"sstudentFirstName": "Alan",
+		"sstudentLastName": "Saavedra"
+	    }
+	],
+	"classFilteredStudents": null,
+	"lclassId": 3,
+	"sclassCode": "MAT-101",
+	"sclassTitle": "Maths",
+	"sclassDescription": "Learn maths"
 }
 ```
 
