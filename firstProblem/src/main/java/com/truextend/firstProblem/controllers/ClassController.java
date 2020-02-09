@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,16 +28,19 @@ public class ClassController {
 	@Autowired
 	ClassService classService = new ClassServiceImpl();
 
+	@CrossOrigin
 	@GetMapping
 	public List<ClassEntity> findAll() {
 		return classService.findAll();
 	}
 
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<ClassEntity> save(@Valid @RequestBody ClassEntity classEntity) {
 		return ResponseEntity.ok(classService.save(classEntity));
 	}
 
+	@CrossOrigin
 	@PutMapping("/{sClassId}")
 	public ResponseEntity<ClassEntity> update(@PathVariable String sClassId,
 			@Valid @RequestBody ClassEntity classEntity) {
@@ -45,12 +49,14 @@ public class ClassController {
 		return ResponseEntity.ok(classService.save(classEntity));
 	}
 
+	@CrossOrigin
 	@DeleteMapping("/{sClassId}")
 	public void delete(@PathVariable String sClassId) {
 		Long lClassId = Long.parseLong(sClassId);
 		classService.deleteById(lClassId);
 	}
 
+	@CrossOrigin
 	@PostMapping(path = "/search")
 	public ResponseEntity<List<ClassEntity>> filter(@Valid @RequestBody ClassEntity classEntity)
 			throws JsonProcessingException {
