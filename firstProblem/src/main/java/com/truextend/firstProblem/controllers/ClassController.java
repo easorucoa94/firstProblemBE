@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,11 +51,17 @@ public class ClassController {
 		return ResponseEntity.ok(classService.save(classEntity));
 	}
 
+	@SuppressWarnings("rawtypes")
 	@CrossOrigin
 	@DeleteMapping("/{sClassId}")
-	public void delete(@PathVariable String sClassId) {
-		Long lClassId = Long.parseLong(sClassId);
-		classService.deleteById(lClassId);
+	public ResponseEntity delete(@PathVariable String sClassId) {
+		try {
+			Long lClassId = Long.parseLong(sClassId);
+			classService.deleteById(lClassId);
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception exception) {
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@CrossOrigin
