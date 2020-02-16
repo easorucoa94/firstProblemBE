@@ -10,6 +10,8 @@ import com.truextend.firstProblem.entities.ClassEntity;
 @Service
 public interface ClassService {
 	public List<ClassEntity> findAll();
+	
+	public ClassEntity findByLClassId(Long lClassId);
 
 	public ClassEntity save(ClassEntity classEntity);
 
