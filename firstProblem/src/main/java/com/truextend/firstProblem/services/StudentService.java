@@ -10,6 +10,8 @@ import com.truextend.firstProblem.entities.StudentEntity;
 @Service
 public interface StudentService {
 	public List<StudentEntity> findAll();
+	
+	public StudentEntity findByLStudentId(Long lStudentId);
 
 	public StudentEntity save(StudentEntity studentEntity);
 

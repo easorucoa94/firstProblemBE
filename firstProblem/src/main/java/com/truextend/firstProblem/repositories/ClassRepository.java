@@ -13,6 +13,9 @@ import com.truextend.firstProblem.entities.ClassEntity;
 public interface ClassRepository extends CrudRepository<ClassEntity, Long> {
 	public List<ClassEntity> findAll();
 
+	@Query(" FROM ClassEntity classEntity WHERE classEntity.lClassId = ?1")
+	public ClassEntity findByLClassId(Long lClassId);
+
 	@Query(" FROM ClassEntity classEntity LEFT JOIN classEntity.studentsInClass classStudents WHERE (?4 IS NULL OR classStudents.lStudentId IN ?4) AND classEntity.sClassCode LIKE %?1% AND classEntity.sClassTitle LIKE %?2% AND classEntity.sClassDescription LIKE %?3%")
 	public Set<ClassEntity> findByObjectFilter(String sClassCode, String sClassTitle, String sClassDescription,
 			List<Long> classFilteredStudents);

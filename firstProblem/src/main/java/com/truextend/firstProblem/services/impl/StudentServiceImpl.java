@@ -20,6 +20,10 @@ public class StudentServiceImpl implements StudentService {
 	public List<StudentEntity> findAll() {
 		return studentRepository.findAll();
 	}
+	
+	public StudentEntity findByLStudentId(Long lStudentId) {
+		return studentRepository.findByLStudentId(lStudentId);
+	}
 
 	@Override
 	public StudentEntity save(StudentEntity studentEntity) {

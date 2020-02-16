@@ -20,6 +20,10 @@ public class ClassServiceImpl implements ClassService {
 	public List<ClassEntity> findAll() {
 		return classRepository.findAll();
 	}
+	
+	public ClassEntity findByLClassId(Long lClassId) {
+		return classRepository.findByLClassId(lClassId);
+	}
 
 	@Override
 	public ClassEntity save(ClassEntity classEntity) {

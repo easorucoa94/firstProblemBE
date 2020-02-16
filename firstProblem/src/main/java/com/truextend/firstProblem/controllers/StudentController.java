@@ -1,6 +1,7 @@
 package com.truextend.firstProblem.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -42,25 +43,41 @@ public class StudentController {
 		return ResponseEntity.ok(studentService.save(studentEntity));
 	}
 
+	@SuppressWarnings("rawtypes")
 	@CrossOrigin
 	@PutMapping("/{sStudentId}")
-	public ResponseEntity<StudentEntity> update(@PathVariable String sStudentId,
-			@Valid @RequestBody StudentEntity studentEntity) {
-		Long lStudentId = Long.parseLong(sStudentId);
-		studentEntity.setLStudentId(lStudentId);
-		return ResponseEntity.ok(studentService.save(studentEntity));
+	public ResponseEntity update(@PathVariable String sStudentId, @Valid @RequestBody StudentEntity studentEntity) {
+		Optional<String> studentId = Optional.ofNullable(sStudentId);
+		if (studentId.isEmpty()) {
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		} else {
+			Long lStudentId = Long.parseLong(sStudentId);
+			Optional<StudentEntity> foundStudent = Optional.ofNullable(studentService.findByLStudentId(lStudentId));
+			if (foundStudent.isPresent()) {
+				studentEntity.setLStudentId(lStudentId);
+				return ResponseEntity.ok(studentService.save(studentEntity));
+			} else {
+				return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			}
+		}
 	}
 
 	@SuppressWarnings("rawtypes")
 	@CrossOrigin
 	@DeleteMapping("/{sStudentId}")
 	public ResponseEntity delete(@PathVariable String sStudentId) {
-		try {
-			Long lStudentId = Long.parseLong(sStudentId);
-			studentService.deleteById(lStudentId);
-			return new ResponseEntity(HttpStatus.OK);
-		} catch (Exception exception) {
+		Optional<String> studentId = Optional.ofNullable(sStudentId);
+		if (studentId.isEmpty()) {
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		} else {
+			Long lStudentId = Long.parseLong(sStudentId);
+			Optional<StudentEntity> foundStudent = Optional.ofNullable(studentService.findByLStudentId(lStudentId));
+			if (foundStudent.isPresent()) {
+				studentService.deleteById(lStudentId);
+				return new ResponseEntity(HttpStatus.OK);
+			} else {
+				return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
 

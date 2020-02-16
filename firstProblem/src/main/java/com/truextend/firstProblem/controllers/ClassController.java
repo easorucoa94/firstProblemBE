@@ -1,6 +1,7 @@
 package com.truextend.firstProblem.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -42,25 +43,42 @@ public class ClassController {
 		return ResponseEntity.ok(classService.save(classEntity));
 	}
 
+	@SuppressWarnings("rawtypes")
 	@CrossOrigin
 	@PutMapping("/{sClassId}")
-	public ResponseEntity<ClassEntity> update(@PathVariable String sClassId,
+	public ResponseEntity update(@PathVariable String sClassId,
 			@Valid @RequestBody ClassEntity classEntity) {
-		Long lClassId = Long.parseLong(sClassId);
-		classEntity.setLClassId(lClassId);
-		return ResponseEntity.ok(classService.save(classEntity));
+		Optional<String> classId = Optional.ofNullable(sClassId);
+		if (classId.isEmpty()) {
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		} else {
+			Long lClassId = Long.parseLong(sClassId);
+			Optional<ClassEntity> foundClass = Optional.ofNullable(classService.findByLClassId(lClassId));
+			if (foundClass.isPresent()) {
+				classEntity.setLClassId(lClassId);
+				return ResponseEntity.ok(classService.save(classEntity));
+			} else {
+				return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			}
+		}		
 	}
 
 	@SuppressWarnings("rawtypes")
 	@CrossOrigin
 	@DeleteMapping("/{sClassId}")
 	public ResponseEntity delete(@PathVariable String sClassId) {
-		try {
-			Long lClassId = Long.parseLong(sClassId);
-			classService.deleteById(lClassId);
-			return new ResponseEntity(HttpStatus.OK);
-		} catch (Exception exception) {
+		Optional<String> classId = Optional.ofNullable(sClassId);
+		if (classId.isEmpty()) {
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		} else {
+			Long lClassId = Long.parseLong(sClassId);
+			Optional<ClassEntity> foundClass = Optional.ofNullable(classService.findByLClassId(lClassId));
+			if (foundClass.isPresent()) {
+				classService.deleteById(lClassId);
+				return new ResponseEntity(HttpStatus.OK);
+			} else {
+				return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
 
